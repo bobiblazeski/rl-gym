@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Simple rl-gym example</title>
+  <script type="text/javascript" src="../dist/gym.js"></script>
+  <script>
+    // Create Tic-tac-toe environment
+    const env = gym.make('TicTacToe');
+    // Retrieve action space
+    const actionSpace = env.getActionSpace();
+    // Play 3 episodes choosing random actions
+    for (let i = 0; i < 3; ++i) {
+      let step = 0;
+      let {observation, reward, done, info} = env.reset();
+      do {
+        ({observation, reward, done, info} = env.step(actionSpace.sample()));
+        console.log(`Episode ${i} Step ${++step}`);
+        console.log(`=> Reward ${reward} Done: ${done} Info: ${info.text}`);
+        env.render();
+      } while (!done);
+    }
+  </script>
+</head>
+
+<body>
+    
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+{
+  "name": "rl-gym",
+  "version": "1.0.0",
+  "description": "A toolkit for developing and comparing reinforcement learning algorithms in JavaScript",
+  "main": "gym.js",
+  "scripts": {
+    "build": "rollup -c",
+    "pretest": "eslint --ignore-path .gitignore ./src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bobiblazeski/rl-gym.git"
+  },
+  "author": "Slobodan Blazeski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bobiblazeski/rl-gym/issues"
+  },
+  "homepage": "https://github.com/bobiblazeski/rl-gym#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^5.4.0",
+    "rollup": "^0.65.0"
+  }
+}
