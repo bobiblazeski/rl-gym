@@ -6,7 +6,7 @@
   <script type="text/javascript" src="../dist/gym.js"></script>
   <script>
     // Create Tic-tac-toe environment
-    const env = gym.make('TicTacToe');
+    const env = gym.make('TicTacToe', {});
     // Retrieve action space
     const actionSpace = env.getActionSpace();
     // Play 3 episodes choosing random actions
