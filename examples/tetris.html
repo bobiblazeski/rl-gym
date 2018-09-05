@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Tetris rl-gym example</title>
+  <link rel="stylesheet" href="../style/tetris.css">
+  <script type="text/javascript" src="../dist/gym.js"></script>
+</head>
+
+<body>
+  <p>This is a recreation of Tetris. Use The Left & Right Arrows to move left and right. You can press the Down Arrow to "Soft Drop". The Up Arrow and Q will rotate right. CTRL and E will rotate left. (Not Simultaneously for rotation) You can press Space for a "Hard Drop". Press Shift to swap HOLD. Fill up 100 Lines to win.</p>
+  <div id="score">Score:</div>
+  <div id="done">Done:</div>
+  <div id="info">Info:</div>
+  <canvas id="canvas" width=228 height=380></canvas>
+  <canvas id="hold" width=76 height=76></canvas>
+  <ul>
+    <li>s - Move Down</li>
+    <li>a - Move Left</li>
+    <li>d - Move Right</li>
+    <li>Space - Drop</li>
+    <li>e - Rotate Clockwise</li>
+    <li>q - Rotate Counter Clockwise</li>
+    <li>w - Flip</li>
+    <li>Shift -Swap</li>
+  </ul>
+  <br>
+  <script>
+    // Create environment
+    const env = gym.make('Tetris', {
+      canvasId: 'canvas',
+      holdId: 'hold',
+    });
+    // Retrieve action space
+    const actionSpace = env.getActionSpace();
+
+    const update = (score, done, info) => {
+      document.getElementById("score").innerText = `Score: ${score}`;
+      document.getElementById("done").innerText = `Done: ${done}`;
+      document.getElementById("info").innerText = `info: ${info}`;
+    };
+
+    const actionMap = {
+      's': 0,
+      'a': 1,
+      'd': 2,
+      ' ': 3,
+      'e': 4,
+      'q': 5,
+      'w': 6,
+      'Shift': 7,
+    };
+    let {observation, reward, done, info} = env.reset();
+    let score = 0;
+    env.render();
+    update(score, done, info.text);
+    document.addEventListener('keydown', event => {
+      if (actionMap.hasOwnProperty(event.key)) {
+        const action = actionMap[event.key];
+        ({observation, reward, done, info} = env.step(action));
+        score += reward;
+        env.render();
+        update(score, done, info.text);
+      } else if (event.key == 'r') {
+        ({observation, reward, done, info} = env.reset());
+        score = 0;
+        env.render();
+        update(score, done, info.text);
+      }
+    });
+  </script> 
+</body>
+</html>

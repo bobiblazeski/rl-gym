@@ -1,0 +1,10 @@
+html {
+  background-color: #aaaaaa;
+};
+canvas {
+  border-color: red;
+  border-width: 2px;
+};
+p {
+  max-width: 600px;
+}
